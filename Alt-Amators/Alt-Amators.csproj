@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Alt_Amators</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <BaseOutputPath>D:\AltV-Amators\resources\Alt-Amators</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="AltVContext.cs" />
+    <Compile Include="Common\CustomPlayer.cs" />
+    <Compile Include="Common\PlayerFactory.cs" />
+    <Compile Include="Common\Result.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Events.cs" />
+    <Compile Include="Migrations\20240804092817_InitUserTable.cs" />
+    <Compile Include="Migrations\20240804092817_InitUserTable.Designer.cs" />
+    <Compile Include="Migrations\AltVContextModelSnapshot.cs" />
+    <Compile Include="Server.cs" />
+    <Compile Include="Service\AuthService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AltV.Net" Version="16.1.1" />
+    <PackageReference Include="AltV.Net.Async" Version="16.1.1" />
+    <PackageReference Include="AltV.Net.Resources.Chat.Api" Version="16.1.1" />
+    <PackageReference Include="AltV.Net.Shared" Version="16.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
