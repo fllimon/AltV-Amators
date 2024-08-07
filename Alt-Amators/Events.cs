@@ -20,7 +20,7 @@ namespace Alt_Amators
         [ScriptEvent(ScriptEventType.PlayerConnect)]
         public void OnPlayerConnect(CustomPlayer player, string reason)
         {
-            player.Emit("Event.ChangeActiveView", "Auth");
+            ChangeActiveView(player, "Auth");  //ToDO: Change to ENUM instead of string
             player.Emit("Event.Auth");
             player.SendChatMessage("Welcome!!!");
         }
@@ -87,6 +87,11 @@ namespace Alt_Amators
 
             player.Spawn(new AltV.Net.Data.Position(user.X, user.Y, user.Z), 0);
             player.Emit("CloseLoginCEF");
+        }
+
+        private void ChangeActiveView(CustomPlayer player, string viewName)
+        {
+            player.Emit("Event.ChangeActiveView", viewName);
         }
     }
 }
