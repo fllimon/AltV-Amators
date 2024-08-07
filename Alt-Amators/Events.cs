@@ -1,4 +1,6 @@
-﻿using Alt_Amators.Service;
+﻿using Alt_Amators.Common;
+using Alt_Amators.Entity;
+using Alt_Amators.Service;
 using AltV.Net;
 using AltV.Net.Elements.Entities;
 using AltV.Net.Enums;
@@ -16,16 +18,55 @@ namespace Alt_Amators
         }
 
         [ScriptEvent(ScriptEventType.PlayerConnect)]
-        public void OnPlayerConnect(IPlayer player, string reason)
+        public void OnPlayerConnect(CustomPlayer player, string reason)
         {
+            player.Emit("Event.ChangeActiveView", "Auth");
             player.Emit("Event.Auth");
             player.SendChatMessage("Welcome!!!");
-            player.Spawn(new AltV.Net.Data.Position(-425, 1123, 325), 0);
+        }
+
+        [ClientEvent("Event.Register")]
+        public void OnPlayerRegistration(CustomPlayer player, string username, string password, string email)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
+            {
+                player.Emit("SendErrorMessage", "Validation failed!");
+
+                return;
+            }
+
+            if (!_authService.IsUserExist(username))
+            {
+                player.Emit("SendErrorMessage", "User with same login already exist");
+
+                return;
+            }
+
+            var user = new User()
+            {
+                Login = username,
+                Password = password,
+                Email = email,
+                Money = 5000,
+                SocialClubName = player.SocialClubName,
+                X = DefaultSettings.SPAWN_POSITION.X, 
+                Y = DefaultSettings.SPAWN_POSITION.Y,
+                Z = DefaultSettings.SPAWN_POSITION.Z,
+                RegistryDate = DateTime.UtcNow,
+                LastVisitDate = DateTime.UtcNow,
+                IsDeleted = false
+            };
+
+            _authService.AddUser(user);
+            _authService.SaveChangesAsync();
+
+            player.Spawn(DefaultSettings.SPAWN_POSITION, 0);
             player.Model = (uint)PedModel.FreemodeMale01;
+            player.Emit("CloseLoginCEF");
         }
 
         [ClientEvent("Event.Login")]
-        public void OnPlayerLogin(Player player, string login, string password)
+        public void OnPlayerLogin(CustomPlayer player, string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {

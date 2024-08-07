@@ -29,11 +29,12 @@ function RegisterUser(){
 			return;	
 		}
 
-        alt.emit('Auth.Register', username, password, email);			
+        alt.emit('Auth.Register', username, registrationPassword, email);			
     }
 
     alert('Password do not match!');
 }
+
 </script>
 
 <body>

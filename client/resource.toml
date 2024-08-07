@@ -1,3 +1,3 @@
 type = 'js'
-client-main = 'alt-svelte/scripts/auth.js'
-client-files = [ 'alt-svelte/scripts/auth.js', 'alt-svelte/public/*' ]
+client-main = 'alt-svelte/scripts/alt-general.js'
+client-files = [ 'alt-svelte/scripts/alt-general.js', 'alt-svelte/public/*' ]

@@ -14,7 +14,7 @@ namespace Alt_Amators.Common
         public string PlayerName { get; set; }
         public long Money { get; set; }
         public byte AdminLevel { get; set; }
-
+        
         public CustomPlayer(ICore core, IntPtr nativePointer, uint id) 
             : base(core, nativePointer, id)
         {

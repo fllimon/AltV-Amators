@@ -36,17 +36,17 @@ namespace Alt_Amators.Service
             return new Result<User>(user, string.Empty);
         }
 
-        private void AddUser(User user)
+        public void AddUser(User user)
         {
             _context.Users.Add(user);
         }
 
-        private void SaveChangesAsync()
+        public void SaveChangesAsync()
         {
             _context.SaveChanges();
         }
 
-        private bool IsExist(string login)
+        public bool IsUserExist(string login)
         {
             return _context.Users.FirstOrDefault(x => x.Login == login) == null;
         }

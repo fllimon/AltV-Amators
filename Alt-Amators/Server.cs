@@ -15,7 +15,6 @@ namespace Alt_Amators
     {
         public override void OnStart()
         {
-            AltVContext alt = new AltVContext();
             Alt.LogInfo("Server started!");
         }
 
